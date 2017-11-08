@@ -116,7 +116,7 @@ class VarnishHandler(Telnet):
     def auth(self, secret, content):
         challenge = content[:32]
         auth = '{}\n{}\n{}\n'.format(challenge, secret, challenge)
-        response = sha256(auth.encode())
+        response = sha256(auth.encode('ascii'))
         response_str = 'auth {}'.format(response.hexdigest())
         self.fetch(response_str)
 
